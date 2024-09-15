@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Roboto Mono', monospace;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.click-button {
+    padding: 15px 30px;
+    font-size: 28px;
+    color: #fff;
+    background: none;
+    border: 2px solid #00f;
+    cursor: pointer;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.5s ease;
+    z-index: 1;
+}
+
+.click-button::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0, 0, 255, 0.5), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+    z-index: -1;
+}
+
+.click-button:hover::before {
+    transform: translateX(100%);
+}
+
+.click-button:hover {
+    color: #00f;
+}
+
+.container {
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.scrolling-info-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.scrolling-info {
+    position: absolute;
+    width: 100%;
+    white-space: pre-wrap;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.5;
+    animation: scroll-up 10s linear infinite;
+}
+
+@keyframes scroll-up {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+.info-line {
+    margin-bottom: 5px;
+}
+
+audio {
+    display: none;
+}
